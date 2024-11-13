@@ -1,6 +1,5 @@
 #include "Orders/RTSCharacterAIController.h"
 
-#include "OrdersAbilities.h"
 
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
@@ -11,6 +10,7 @@
 #include "Orders/RTSOrderHelper.h"
 #include "Orders/RTSOrderWithBehavior.h"
 #include "Orders/RTSStopOrder.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 
 ARTSCharacterAIController::ARTSCharacterAIController(const FObjectInitializer& ObjectInitializer)
@@ -19,7 +19,7 @@ ARTSCharacterAIController::ARTSCharacterAIController(const FObjectInitializer& O
     PrimaryActorTick.bCanEverTick = true;
 }
 
-void ARTSCharacterAIController::Possess(APawn* InPawn)
+void ARTSCharacterAIController::OnPossess(APawn* InPawn)
 {
     Super::Possess(InPawn);
 

@@ -3,6 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/RTSAbilitySystemComponent.h"
+#include "Stats/Stats2.h"
+
 
 DECLARE_LOG_CATEGORY_EXTERN(LogRTS, Log, All);
 

@@ -1,7 +1,6 @@
 #include "Orders/RTSOrderHelper.h"
 
-#include "OrdersAbilities.h"
-
+#include "Runtime\GameplayTags\Classes\GameplayTagContainer.h"
 #include "AbilitySystemComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Pawn.h"
@@ -14,6 +13,7 @@
 #include "Orders/RTSOrderComponent.h"
 #include "Orders/RTSOrderTargetData.h"
 #include "Orders/RTSOrderWithBehavior.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 
 bool URTSOrderHelper::CanObeyOrder(TSoftClassPtr<URTSOrder> OrderType, const AActor* OrderedActor, int32 Index)

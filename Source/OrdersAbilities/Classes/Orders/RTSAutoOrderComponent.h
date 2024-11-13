@@ -1,9 +1,6 @@
 #pragma once
-
-#include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Orders/RTSOrderTypeWithIndex.h"
-#include "Orders/RTSOrderData.h"
+
 #include "RTSAutoOrderComponent.generated.h"
 
 class APlayerState;
@@ -34,7 +31,7 @@ public:
     bool GetHumanPlayerAutoOrderState(const FRTSOrderTypeWithIndex& Order);
 
     //~ Begin UActorComponent Interface
-    virtual void BeginPlay() override;
+    virtual void BeginPlay();
     //~ End UActorComponent Interface
 
     void CheckAutoOrders();

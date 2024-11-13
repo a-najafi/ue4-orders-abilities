@@ -1,20 +1,15 @@
 #include "AbilitySystem/RTSAbilitySystemHelper.h"
 
-#include "OrdersAbilities.h"
-
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemGlobals.h"
 #include "AbilitySystemInterface.h"
 #include "AttributeSet.h"
-#include "GameplayAbility.h"
 #include "GameplayAbilitySpec.h"
 #include "GameplayCueManager.h"
 #include "GameplayEffect.h"
 #include "GameplayTagContainer.h"
 #include "GameplayTagsManager.h"
-#include "UnrealType.h"
-#include "UObjectIterator.h"
 #include "Engine/BlueprintGeneratedClass.h"
 #include "Engine/SCS_Node.h"
 #include "Kismet/DataTableFunctionLibrary.h"
@@ -24,6 +19,8 @@
 #include "AbilitySystem/RTSGameplayEffect.h"
 #include "AbilitySystem/RTSGlobalTags.h"
 #include "Orders/RTSOrderTargetData.h"
+#include "UObject/UnrealTypePrivate.h"
+#include "UObject/UObjectIterator.h"
 
 
 // ---------------------------------------------------------------------------------------------------
@@ -69,6 +66,7 @@ float URTSAbilitySystemHelper::GetAttributeDefaultValue(TSubclassOf<AActor> Acto
     float AttributeValue;
     FString ContextString;
 
+    
     UDataTableFunctionLibrary::EvaluateCurveTableRow(CurveTable, FName(*RowName), Level, Result, AttributeValue,
                                                      ContextString);
     return Result == EEvaluateCurveTableResult::Type::RowFound ? AttributeValue : 0.0f;
@@ -1005,12 +1003,16 @@ TArray<FGameplayAttribute> URTSAbilitySystemHelper::FindGameplayAttributes()
     for (TObjectIterator<UClass> ClassIt; ClassIt; ++ClassIt)
     {
         UClass* Class = *ClassIt;
-        if (Class->IsChildOf(UAttributeSet::StaticClass()) && !Class->ClassGeneratedBy)
+        if (Class->IsChildOf(UAttributeSet::StaticClass())
+#if WITH_EDITORONLY_DATA
+        && !Class->ClassGeneratedBy 
+#endif
+        )
         {
-            for (TFieldIterator<UProperty> PropertyIt(Class, EFieldIteratorFlags::ExcludeSuper); PropertyIt;
+            for (TFieldIterator<FProperty> PropertyIt(Class, EFieldIteratorFlags::ExcludeSuper); PropertyIt;
                  ++PropertyIt)
             {
-                UProperty* Property = *PropertyIt;
+                FProperty* Property = *PropertyIt;
                 Attributes.Add(FGameplayAttribute(Property));
             }
         }

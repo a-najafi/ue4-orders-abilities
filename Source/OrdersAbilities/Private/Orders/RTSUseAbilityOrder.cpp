@@ -1,11 +1,5 @@
 #include "Orders/RTSUseAbilityOrder.h"
 
-#include "OrdersAbilities.h"
-
-#include "AbilitySystemBlueprintLibrary.h"
-#include "AbilitySystemComponent.h"
-#include "GameplayAbility.h"
-#include "GameplayAbilityTargetTypes.h"
 #include "GameFramework/Actor.h"
 
 #include "AbilitySystem/RTSAbilitySystemComponent.h"
@@ -15,6 +9,7 @@
 #include "Orders/RTSOrderErrorTags.h"
 #include "Orders/RTSOrderProcessPolicy.h"
 #include "Orders/RTSOrderTargetData.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 
 URTSUseAbilityOrder::URTSUseAbilityOrder()

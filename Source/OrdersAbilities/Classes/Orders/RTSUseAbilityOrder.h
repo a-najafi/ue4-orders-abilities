@@ -1,7 +1,6 @@
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Text.h"
+#include "RTSOrderWithBehavior.h"
 #include "Orders/RTSOrderWithBehavior.h"
 #include "Orders/RTSTargetType.h"
 #include "RTSUseAbilityOrder.generated.h"

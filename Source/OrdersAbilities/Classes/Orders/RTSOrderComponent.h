@@ -1,9 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "RTSOrderData.h"
 #include "Components/ActorComponent.h"
-#include "Orders/RTSOrderData.h"
-#include "Orders/RTSOrderResult.h"
 #include "RTSOrderComponent.generated.h"
 
 class URTSSelectableComponent;
@@ -24,7 +23,7 @@ public:
     URTSOrderComponent(const FObjectInitializer& ObjectInitializer);
 
     //~ Begin UActorComponent Interface
-    virtual void BeginPlay() override;
+    virtual void BeginPlay();
     //~ Begin UActorComponent Interface
 
     void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;

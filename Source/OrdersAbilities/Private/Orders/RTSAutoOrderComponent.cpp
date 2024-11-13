@@ -1,15 +1,14 @@
 #include "Orders/RTSAutoOrderComponent.h"
 
-#include "OrdersAbilities.h"
-
-#include "UnrealNetwork.h"
 
 #include "GameFramework/PlayerState.h"
 #include "Kismet/GameplayStatics.h"
+#include "Net/UnrealNetwork.h"
 
 #include "Orders/RTSAutoOrderProvider.h"
 #include "Orders/RTSOrderHelper.h"
 #include "Orders/RTSOrderComponent.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 DECLARE_CYCLE_STAT(TEXT("RTS - Auto Order Target Acquisition"), STAT_RTSAutoOrderTargetAcquisition, STATGROUP_RTS);
 
@@ -73,9 +72,8 @@ bool URTSAutoOrderComponent::GetHumanPlayerAutoOrderState(const FRTSOrderTypeWit
 
 void URTSAutoOrderComponent::BeginPlay()
 {
-    Super::BeginPlay();
 
-    AActor* Owner = GetOwner();
+    AActor* Owner = GetOwner<AActor>();
 
     if (!IsValid(Owner))
     {
@@ -216,7 +214,7 @@ void URTSAutoOrderComponent::OnOwnerChanged(APlayerState* PreviousOwner, APlayer
         return;
     }
 
-    URTSOrderComponent* OrderComponent = GetOwner()->FindComponentByClass<URTSOrderComponent>();
+    URTSOrderComponent* OrderComponent = GetOwner<AActor>()->FindComponentByClass<URTSOrderComponent>();
     if (OrderComponent == nullptr)
     {
         return;

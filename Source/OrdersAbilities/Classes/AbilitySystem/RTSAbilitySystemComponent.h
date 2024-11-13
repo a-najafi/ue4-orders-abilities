@@ -1,8 +1,6 @@
 #pragma once
 
-#include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
-#include "GameplayAbility.h"
 #include "Orders/RTSAutoOrderProvider.h"
 #include "Orders/RTSOrderTypeWithIndex.h"
 #include "Orders/RTSUseAbilityOrder.h"

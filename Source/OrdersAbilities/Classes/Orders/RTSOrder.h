@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Text.h"
 #include "UObject/NoExportTypes.h"
 #include "Orders/RTSOrderGroupExecutionType.h"
 #include "Orders/RTSOrderPreviewData.h"

@@ -1,9 +1,5 @@
 #include "Orders/RTSOrderWithBehavior.h"
 
-#include "OrdersAbilities.h"
-
-#include "Vector2D.h"
-#include "BehaviorTree/BehaviorTree.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Pawn.h"
 
@@ -12,6 +8,7 @@
 #include "Orders/RTSOrderData.h"
 #include "Orders/RTSOrderResult.h"
 #include "Orders/RTSOrderTargetData.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 
 URTSOrderWithBehavior::URTSOrderWithBehavior()

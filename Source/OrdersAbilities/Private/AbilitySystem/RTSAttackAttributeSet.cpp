@@ -30,54 +30,55 @@ void URTSAttackAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
 
 void URTSAttackAttributeSet::OnRep_Damage()
 {
-    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, Damage);
+    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, Damage, DamageAttribute().GetNumericValue(this));
 }
 
 const FGameplayAttribute& URTSAttackAttributeSet::DamageAttribute()
 {
-    static FGameplayAttribute Attribute(FindFieldChecked<UProperty>(
+    
+    static FGameplayAttribute Attribute(FindFieldChecked<FProperty>(
         URTSAttackAttributeSet::StaticClass(), GET_MEMBER_NAME_CHECKED(URTSAttackAttributeSet, Damage)));
     return Attribute;
 }
 
 void URTSAttackAttributeSet::OnRep_Cooldown()
 {
-    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, Cooldown);
+    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, Cooldown,CooldownAttribute().GetNumericValue(this));
 }
 
 const FGameplayAttribute& URTSAttackAttributeSet::CooldownAttribute()
 {
-    static FGameplayAttribute Attribute(FindFieldChecked<UProperty>(
+    static FGameplayAttribute Attribute(FindFieldChecked<FProperty>(
         URTSAttackAttributeSet::StaticClass(), GET_MEMBER_NAME_CHECKED(URTSAttackAttributeSet, Cooldown)));
     return Attribute;
 }
 
 void URTSAttackAttributeSet::OnRep_Range()
 {
-    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, Range);
+    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, Range, RangeAttribute().GetNumericValue(this));
 }
 
 const FGameplayAttribute& URTSAttackAttributeSet::RangeAttribute()
 {
-    static FGameplayAttribute Attribute(FindFieldChecked<UProperty>(
+    static FGameplayAttribute Attribute(FindFieldChecked<FProperty>(
         URTSAttackAttributeSet::StaticClass(), GET_MEMBER_NAME_CHECKED(URTSAttackAttributeSet, Range)));
     return Attribute;
 }
 
 void URTSAttackAttributeSet::OnRep_OutgoingDamageMultiplier()
 {
-    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, OutgoingDamageMultiplier);
+    GAMEPLAYATTRIBUTE_REPNOTIFY(URTSAttackAttributeSet, OutgoingDamageMultiplier, OutgoingDamageMultiplierAttribute().GetNumericValue(this));
 }
 
 const FGameplayAttribute& URTSAttackAttributeSet::OutgoingDamageMultiplierAttribute()
 {
     static FGameplayAttribute Attribute(
-        FindFieldChecked<UProperty>(URTSAttackAttributeSet::StaticClass(),
+        FindFieldChecked<FProperty>(URTSAttackAttributeSet::StaticClass(),
                                     GET_MEMBER_NAME_CHECKED(URTSAttackAttributeSet, OutgoingDamageMultiplier)));
     return Attribute;
 }
 
-bool URTSAttackAttributeSet::ShouldInitProperty(bool FirstInit, UProperty* PropertyToInit) const
+bool URTSAttackAttributeSet::ShouldInitProperty(bool FirstInit, FProperty* PropertyToInit) const
 {
     // We do not want the health property to change when the attribute sets properties where initialized using a curve
     // table.

@@ -2,9 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "GameplayTagContainer.h"
-#include "Text.h"
-#include "Vector2D.h"
 #include "Orders/RTSOrder.h"
 #include "Orders/RTSOrderData.h"
 #include "Orders/RTSOrderErrorTags.h"

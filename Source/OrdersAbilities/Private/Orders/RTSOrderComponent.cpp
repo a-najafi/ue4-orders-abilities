@@ -1,8 +1,5 @@
 #include "Orders/RTSOrderComponent.h"
 
-#include "OrdersAbilities.h"
-
-#include "UnrealNetwork.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
@@ -10,25 +7,25 @@
 
 #include "AbilitySystem/RTSAbilitySystemHelper.h"
 #include "AbilitySystem/RTSGlobalTags.h"
+#include "Net/UnrealNetwork.h"
 #include "Orders/RTSCharacterAIController.h"
 #include "Orders/RTSOrder.h"
 #include "Orders/RTSOrderErrorTags.h"
 #include "Orders/RTSOrderHelper.h"
 #include "Orders/RTSStopOrder.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 
 URTSOrderComponent::URTSOrderComponent(const FObjectInitializer& ObjectInitializer)
     : Super(ObjectInitializer)
 {
     SetIsReplicated(true);
-
-    LastOrderHomeLocation = FVector::ZeroVector;
+    LastOrderHomeLocation = FVector::Zero();
     bIsHomeLocationSet = false;
 }
 
 void URTSOrderComponent::BeginPlay()
 {
-    Super::BeginPlay();
 
     APawn* Pawn = Cast<APawn>(GetOwner());
     if (Pawn == nullptr)
@@ -98,7 +95,8 @@ void URTSOrderComponent::ReceivedOrderQueue()
 
 void URTSOrderComponent::IssueOrder(const FRTSOrderData& Order)
 {
-    AActor* Owner = GetOwner();
+    
+    AActor* Owner = GetOwner<AActor>();
 
     // It is impossible for clients to issue orders. Clients need to issue orders using their player controller.
     if (!Owner->HasAuthority())

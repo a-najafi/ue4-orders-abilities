@@ -1,10 +1,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayAbility.h"
-
-#include "AttributeSet.h"
-#include "Text.h"
 
 #include "Orders/RTSOrderGroupExecutionType.h"
 #include "Orders/RTSOrderPreviewData.h"

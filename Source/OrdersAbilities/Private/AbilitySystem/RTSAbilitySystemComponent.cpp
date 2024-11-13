@@ -1,8 +1,6 @@
 #include "AbilitySystem/RTSAbilitySystemComponent.h"
 
-#include "OrdersAbilities.h"
 
-#include "UnrealNetwork.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemGlobals.h"
@@ -17,6 +15,8 @@
 #include "AbilitySystem/RTSGameplayAbility.h"
 #include "AbilitySystem/RTSGlobalTags.h"
 #include "AbilitySystem/RTSInitialStatusTagsProvider.h"
+#include "Net/UnrealNetwork.h"
+#include "OrdersAbilities/OrdersAbilities.h"
 
 URTSAbilitySystemComponent::URTSAbilitySystemComponent()
 {
@@ -33,11 +33,13 @@ void URTSAbilitySystemComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProp
     DOREPLIFETIME(URTSAbilitySystemComponent, AbilityPoints);
     DOREPLIFETIME(URTSAbilitySystemComponent, ItemAbilities);
 
+    
     // Our pawns are owned by PlayerControllers, but possessed by AIControllers.
     // As APawn::GetNetConnection() is forwarded to their respective controller,
     // we need to change the replication condition for ActivatableAbilities in order
     // to properly replicate to clients.
-    DOREPLIFETIME_CHANGE_CONDITION(URTSAbilitySystemComponent, ActivatableAbilities, COND_None);
+    DOREPLIFETIME_CONDITION(URTSAbilitySystemComponent, ActivatableAbilities, COND_None)
+    
 }
 
 FName URTSAbilitySystemComponent::GetName() const
@@ -487,11 +489,11 @@ void URTSAbilitySystemComponent::InitializeAttributes(int AttributeLevel, bool b
     // This is a work around for a bug that happens at least in the editor. It might be that the 'SpawnedAttributes'
     // contains nullptr entries for some for some unknown reason. This has properly something to do with serialization.
     // 'AttributeInitter->InitAttributeSetDefaults' will crash when the array contains a nullptr.
-    for (int32 i = SpawnedAttributes.Num() - 1; i >= 0; --i)
+    for (int32 i = GetSpawnedAttributes().Num() - 1; i >= 0; --i)
     {
-        if (SpawnedAttributes[i] == nullptr)
+        if (GetSpawnedAttributes()[i] == nullptr)
         {
-            SpawnedAttributes.RemoveAt(i);
+            RemoveSpawnedAttribute(GetSpawnedAttributes()[i]);
         }
     }
 
@@ -500,7 +502,7 @@ void URTSAbilitySystemComponent::InitializeAttributes(int AttributeLevel, bool b
 
     AttributeInitter->InitAttributeSetDefaults(this, GroupName, AttributeLevel, bInitialInit);
 
-    for (UAttributeSet* AttributeSet : SpawnedAttributes)
+    for (UAttributeSet* AttributeSet : GetSpawnedAttributes())
     {
         URTSAttributeSet* RTSAttributeSet = Cast<URTSAttributeSet>(AttributeSet);
         if (RTSAttributeSet != nullptr)

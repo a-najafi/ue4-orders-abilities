@@ -1,16 +1,8 @@
 #pragma once
-
-#include "CoreMinimal.h"
+#include "Abilities/GameplayAbilityTargetTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "AttributeSet.h"
-#include "GameplayAbility.h"
-#include "GameplayAbilityTypes.h"
-#include "GameplayAbilityTargetTypes.h"
-#include "GameplayEffect.h"
-#include "GameplayEffectTypes.h"
-#include "Text.h"
-#include "Orders/RTSOrderTargetData.h"
-#include "Orders/RTSTargetType.h"
+#include "OrdersAbilities\Classes\Orders\RTSTargetType.h"
+
 #include "RTSAbilitySystemHelper.generated.h"
 
 

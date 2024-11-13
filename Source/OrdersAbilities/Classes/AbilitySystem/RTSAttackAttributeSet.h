@@ -1,7 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/RTSAttributeSet.h"
+#include "RTSAttributeSet.h"
+#include "UObject/UnrealTypePrivate.h"
 #include "RTSAttackAttributeSet.generated.h"
 
 /**
@@ -55,7 +56,7 @@ public:
     static const FGameplayAttribute& OutgoingDamageMultiplierAttribute();
 
     //~ Begin UAttributeSet Interface
-    virtual bool ShouldInitProperty(bool FirstInit, UProperty* PropertyToInit) const override;
+    virtual bool ShouldInitProperty(bool FirstInit, FProperty* PropertyToInit) const override;
     virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
     //~ End UAttributeSet Interface
 
